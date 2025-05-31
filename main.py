@@ -4,6 +4,7 @@ from bd import Database
 from cadastro import CadastroGUI
 from relatorio import RelatorioGUI
 from vendas import VendasGUI
+from editarProduto import EditarProdutoGUI
 
 class MainApp(tk.Tk):
     def __init__(self):
@@ -29,9 +30,11 @@ class MainApp(tk.Tk):
         self.cadastro_tab = CadastroGUI(self.notebook, self.database)
         self.vendas_tab = VendasGUI(self.notebook, self.database)
         self.relatorio_tab = RelatorioGUI(self.notebook, self.database)
+        self.editarProduto_tab = EditarProdutoGUI(self.notebook, self.database)
 
         self.notebook.add(self.cadastro_tab, text="Cadastro")
         self.notebook.add(self.vendas_tab, text="Vendas")          
+        self.notebook.add(self.editarProduto_tab, text="Editar produto")
         self.notebook.add(self.relatorio_tab, text="Relatórios")
 
 if __name__ == "__main__":

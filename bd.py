@@ -27,6 +27,13 @@ class Database:
                 FOREIGN KEY (produto_id) REFERENCES produtos(id)
             )
         """)
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS usuarios (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL, 
+                senha TEXT NOT NULL
+            )
+        """)
         self.conn.commit()
 
     def registrar_venda(self, produto_id, quantidade, total):
@@ -62,8 +69,16 @@ class Database:
         return self.cursor.fetchall()
 
     def buscar_produto(self, produto_id):
-        self.cursor.execute("SELECT id, nome, preco, estoque FROM produtos WHERE id = ?", (produto_id,))
+        self.cursor.execute("SELECT id, nome, categoria, preco, estoque, fornecedor FROM produtos WHERE id = ?", (produto_id,))
         return self.cursor.fetchone()
+    
+    def atualiza_produto(self, produto_id, nome, categoria, preco, estoque, fornecedor):
+        self.cursor.execute("""
+            UPDATE produtos 
+            SET nome = ?, categoria = ?, preco = ?, estoque = ?, fornecedor = ?
+            WHERE id = ?
+        """, (nome, categoria, preco, estoque, fornecedor, produto_id))
+        self.conn.commit()
 
     def fechar_conexao(self):
         self.conn.close()

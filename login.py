@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 import sqlite3
 from main import MainApp
+from cadastroUsuario import CadastroUsuario
 
 class Login:
     def __init__(self):
@@ -32,14 +33,30 @@ class Login:
     def obj(self):
         self.loginframe = tk.LabelFrame(self.loginw, bg="#D2B48C", height=400, width=300)
         self.loginframe.place(x=103, y=95)
+
         self.toplabel = tk.Label(self.loginframe, fg="white", bg="#D2B48C", anchor="center", text="Login", font="Roboto 40 bold")
         self.toplabel.place(x=75, y=25)
+
+        # usuario 
+        self.userlabel = tk.Label(self.loginframe, text="Usuário", bg="#D2B48C", fg="black", font="Roboto 12")
+        self.userlabel.place(x=35, y=120)
         self.us = ttk.Entry(self.loginframe, width=20, textvariable=self.username, font="Roboto 14")
         self.us.place(x=35, y=145, height=40)
+
+        # senha
+        self.passlabel = tk.Label(self.loginframe, text="Senha", bg="#D2B48C", fg="black", font="Roboto 12")
+        self.passlabel.place(x=35, y=185)
+
         self.pa = ttk.Entry(self.loginframe, width=20, textvariable=self.password, font="Roboto 14", show="*")
-        self.pa.place(x=35, y=185, height=40)
+        self.pa.place(x=35, y=205, height=40)
+
+        # btn login 
         self.signin = tk.Button(self.loginframe, width=20, text="ENTRAR", bg="#008B8B", fg="white", bd="0", font="Roboto 14", command=self.verificar_login)
         self.signin.place(x=35, y=290)
+        
+        # btn cadastro 
+        self.btn_cadastrar = tk.Button(self.loginframe, width=20, text="CADASTRAR USUÁRIO", bg="#555555", fg="white", bd="0", font="Roboto 12", command=self.cadastro_usuario)
+        self.btn_cadastrar.place(x=35, y=340)
 
         
 
@@ -57,13 +74,17 @@ class Login:
 
             if resultado:
                 self.loginw.destroy()
-                MainApp()  
+                app = MainApp()
+                app.mainloop()  
             else:
                 messagebox.showerror("ATENÇÃO", "USUÁRIO OU SENHA INCORRETOS")
 
             conn.close()
         except sqlite3.Error as erro:
             messagebox.showerror("ERRO", f"Erro de conexão: {erro}")
+    def cadastro_usuario(self):
+        CadastroUsuario(self.loginw)
+
 
 if __name__ == "__main__":
     Login()
