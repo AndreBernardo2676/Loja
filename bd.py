@@ -79,6 +79,20 @@ class Database:
             WHERE id = ?
         """, (nome, categoria, preco, estoque, fornecedor, produto_id))
         self.conn.commit()
+    
+    def excluir_produto(self, produto_id):
+        try:
+            conn = sqlite3.connect("loja.db")  
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM produtos WHERE id = ?", (produto_id,))
+            conn.commit()
+            sucesso = cursor.rowcount > 0
+            conn.close()
+            return sucesso
+        except Exception as e:
+            print("Erro ao excluir produto:", e)
+            return False
+
 
     def fechar_conexao(self):
         self.conn.close()

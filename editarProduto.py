@@ -39,6 +39,7 @@ class EditarProdutoGUI(tk.Frame):
         ttk.Entry(frame, textvariable=self.fornecedor_var, font=("Roboto", 12)).grid(row=5, column=1, columnspan=2, pady=5, sticky="ew")
 
         tk.Button(self, text="Atualizar", command=self.atualizar_produto).pack()
+        tk.Button(self, text="Excluir", command=self.excluir_produto).pack(pady=5)
 
         for i in range(3):
             frame.grid_columnconfigure(i, weight=1)
@@ -90,3 +91,29 @@ class EditarProdutoGUI(tk.Frame):
                 messagebox.showerror("Erro", "Falha ao atualizar produto.")
         except Exception as e:
             messagebox.showerror("Erro", f"Erro ao atualizar produto: {e}")
+
+    def excluir_produto(self):
+        produto_id = self.produto_id_var.get().strip()
+
+        if not produto_id.isdigit():
+            messagebox.showwarning("Atenção", "Digite um ID válido para excluir!")
+            return
+
+        confirmacao = messagebox.askyesno("Confirmação", f"Tem certeza que deseja excluir o produto ID {produto_id}?")
+        if not confirmacao:
+            return
+
+        try:
+            sucesso = self.database.excluir_produto(int(produto_id))
+            if sucesso:
+                messagebox.showinfo("Sucesso", "Produto excluído com sucesso!")
+                self.produto_id_var.set("")
+                self.nome_var.set("")
+                self.categoria_var.set("")
+                self.preco_var.set("")
+                self.estoque_var.set("")
+                self.fornecedor_var.set("")
+            else:
+                messagebox.showerror("Erro", "Produto não encontrado ou não foi possível excluir.")
+        except Exception as e:
+            messagebox.showerror("Erro", f"Erro ao excluir produto: {e}")
