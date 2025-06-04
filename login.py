@@ -29,7 +29,7 @@ class Login:
         if messagebox.askyesno("SAIR", "DESEJA REALMENTE SAIR DO SISTEMA?"):
             self.loginw.destroy()
             exit(0)
-    #Estilizacao dos frames e dos botoes
+    
     def obj(self):
         self.loginframe = tk.LabelFrame(self.loginw, bg="#B1C2DC", height=400, width=300)
         self.loginframe.place(x=103, y=95)
