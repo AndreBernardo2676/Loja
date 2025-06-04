@@ -22,7 +22,7 @@ class MainApp(tk.Tk):
 
         self.database = Database()
 
-        # Notebook com espaçamento ajustado
+        # Notebook 
         self.notebook = ttk.Notebook(self)
         self.notebook.pack(expand=True, fill="both", padx=10, pady=10)
 

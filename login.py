@@ -17,7 +17,7 @@ class Login:
         self.loginw.geometry(f"{width}x{height}+{int(x)}+{int(y)}")
         self.loginw.resizable(0, 0)
         self.loginw.protocol('WM_DELETE_WINDOW', self.__login_del__)
-        self.loginw.config(bg="#D2B48C")
+        self.loginw.config(bg="#FFFFFF")
 
         self.username = tk.StringVar()
         self.password = tk.StringVar()
@@ -29,34 +29,34 @@ class Login:
         if messagebox.askyesno("SAIR", "DESEJA REALMENTE SAIR DO SISTEMA?"):
             self.loginw.destroy()
             exit(0)
-
+    #Estilizacao dos frames e dos botoes
     def obj(self):
-        self.loginframe = tk.LabelFrame(self.loginw, bg="#D2B48C", height=400, width=300)
+        self.loginframe = tk.LabelFrame(self.loginw, bg="#B1C2DC", height=400, width=300)
         self.loginframe.place(x=103, y=95)
 
-        self.toplabel = tk.Label(self.loginframe, fg="white", bg="#D2B48C", anchor="center", text="Login", font="Roboto 40 bold")
+        self.toplabel = tk.Label(self.loginframe, fg="white", bg="#B1C2DC", anchor="center", text="Login", font="Roboto 40 bold")
         self.toplabel.place(x=75, y=25)
 
         # usuario 
-        self.userlabel = tk.Label(self.loginframe, text="Usuário", bg="#D2B48C", fg="black", font="Roboto 12")
+        self.userlabel = tk.Label(self.loginframe, text="Usuário", bg="#B1C2DC", fg="black", font="Roboto 12")
         self.userlabel.place(x=35, y=120)
         self.us = ttk.Entry(self.loginframe, width=20, textvariable=self.username, font="Roboto 14")
         self.us.place(x=35, y=145, height=40)
 
         # senha
-        self.passlabel = tk.Label(self.loginframe, text="Senha", bg="#D2B48C", fg="black", font="Roboto 12")
+        self.passlabel = tk.Label(self.loginframe, text="Senha", bg="#B1C2DC", fg="black", font="Roboto 12")
         self.passlabel.place(x=35, y=185)
 
         self.pa = ttk.Entry(self.loginframe, width=20, textvariable=self.password, font="Roboto 14", show="*")
         self.pa.place(x=35, y=205, height=40)
 
         # btn login 
-        self.signin = tk.Button(self.loginframe, width=20, text="ENTRAR", bg="#008B8B", fg="white", bd="0", font="Roboto 14", command=self.verificar_login)
+        self.signin = tk.Button(self.loginframe, width=20, text="ENTRAR", bg="#4D5E72", fg="white", bd="0", font="Roboto 14", command=self.verificar_login)
         self.signin.place(x=35, y=290)
         
         # btn cadastro 
-        self.btn_cadastrar = tk.Button(self.loginframe, width=20, text="CADASTRAR USUÁRIO", bg="#555555", fg="white", bd="0", font="Roboto 12", command=self.cadastro_usuario)
-        self.btn_cadastrar.place(x=35, y=340)
+        self.btn_cadastrar = tk.Button(self.loginframe, width=20, text="CADASTRAR USUÁRIO", bg="#70807A", fg="white", bd="0", font="Roboto 13", command=self.cadastro_usuario)
+        self.btn_cadastrar.place(x=57, y=340)
 
         
 
