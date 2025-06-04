@@ -9,7 +9,7 @@ from editarProduto import EditarProdutoGUI
 class MainApp(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("🛍️ Lojinha Estácio")
+        self.title("Lojinha Estácio")
         self.geometry("800x500")  
         self.configure(bg="#f5f5f5")
 
