@@ -2,7 +2,7 @@
 
 Este sistema foi desenvolvido em **Python** utilizando **Tkinter** para a interface gráfica e **SQLite** para o banco de dados. Ele permite gerenciar produtos, realizar vendas e controlar cadastros de usuários com sistema de login.
 
-## 📌 Funcionalidades Principais
+##  Funcionalidades Principais
 
 - **Cadastro de Usuário** → Criar contas de acesso ao sistema.
 - **Login com Senha** → Autenticação segura para cada usuário.
