@@ -11,6 +11,8 @@ class VendasGUI(tk.Frame):
         self.produto_combo = ttk.Combobox(self, state="readonly")
         self.produto_combo.pack()
 
+        tk.Button(self, text="Recarregar Produtos", command=self.carregar_produtos).pack()
+
         tk.Label(self, text="Quantidade:").pack()
         self.quantidade_entry = tk.Entry(self)
         self.quantidade_entry.pack()

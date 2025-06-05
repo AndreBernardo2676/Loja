@@ -14,7 +14,8 @@ class Database:
                 categoria TEXT NOT NULL,
                 preco REAL NOT NULL,
                 estoque INTEGER NOT NULL,
-                fornecedor TEXT NOT NULL
+                fornecedor TEXT NOT NULL,
+                ativo BOOLEAN DEFAULT 1
             )
         """)
         self.cursor.execute("""
@@ -65,11 +66,11 @@ class Database:
             return False
 
     def listar_produtos(self):
-        self.cursor.execute("SELECT id, nome, preco, estoque FROM produtos")
+        self.cursor.execute("SELECT id, nome, preco, estoque FROM produtos WHERE ativo = 1")
         return self.cursor.fetchall()
 
     def buscar_produto(self, produto_id):
-        self.cursor.execute("SELECT id, nome, categoria, preco, estoque, fornecedor FROM produtos WHERE id = ?", (produto_id,))
+        self.cursor.execute("SELECT id, nome, categoria, preco, estoque, fornecedor FROM produtos WHERE id = ? AND ativo = 1", (produto_id,))
         return self.cursor.fetchone()
     
     def atualiza_produto(self, produto_id, nome, categoria, preco, estoque, fornecedor):
@@ -84,7 +85,7 @@ class Database:
         try:
             conn = sqlite3.connect("loja.db")  
             cursor = conn.cursor()
-            cursor.execute("DELETE FROM produtos WHERE id = ?", (produto_id,))
+            cursor.execute("UPDATE produtos SET ativo = 0 WHERE id = ?", (produto_id,))
             conn.commit()
             sucesso = cursor.rowcount > 0
             conn.close()
